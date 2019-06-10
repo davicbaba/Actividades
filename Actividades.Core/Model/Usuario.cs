@@ -12,12 +12,12 @@ namespace Actividades.Core.Model
         /// <summary>
         /// Usuario con que se autentica en el sistema
         /// </summary>
-        public string NombreUsuario { get; set; }
+        public string UserName { get; set; }
 
         /// <summary>
         /// Nombre del usuario
         /// </summary>
-        public string Nombre { get; set; }
+        public string Nombres { get; set; }
 
         /// <summary>
         /// Apellidos del usuario
@@ -25,14 +25,12 @@ namespace Actividades.Core.Model
         public string Apellidos { get; set; }
 
         /// <summary>
-        /// Indica cada cuanto se deben recibir notificaciones de actividades a partir que se recibio la primera notificacion de vencimiento
+        /// Indica cada cuanto se deben recibir notificaciones de actividades cuando estas esten por vencer o esten vencidas.
         /// </summary>
+        /// <remarks>
+        /// Tiempo que corre a partir que la primera notificacion llega.
+        /// </remarks>
         public int NotificacionActividadMinutos { get; set; }
-
-        /// <summary>
-        /// Indica cuando se debe enviar la primera notificacion
-        /// </summary>
-        public int TiempoPrimeraNotificacionMinutos { get; set; }
 
     }
 }

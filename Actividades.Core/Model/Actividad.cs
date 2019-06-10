@@ -9,6 +9,13 @@ namespace Actividades.Core.Model
     /// </summary>
     public class Actividad
     {
+        private Estado _Estado { get; set; }
+
+        /// <summary>
+        /// Identificador unico de la actividad
+        /// </summary>
+        public int Id { get; set; }
+
         /// <summary>
         /// Titulo de la actividad
         /// </summary>
@@ -30,20 +37,39 @@ namespace Actividades.Core.Model
         public DateTime? FechaCambioEstado { get; set; }
 
         /// <summary>
+        /// Fecha en que la actividad se elimino
+        /// </summary>
+        public DateTime? FechaBorrado { get; set; }
+
+        /// <summary>
         /// Orden de presentacion de la actividad
         /// </summary>
         public int Orden { get; set; }
 
         /// <summary>
-        /// Estado en que se encuentra la actividad
+        /// Identificador unico del estado
         /// </summary>
-        public Estado Estado { get; set; }
+        public string IdEstado { get;  private set; }
 
         /// <summary>
-        /// Prioridad de la actividad
+        /// Estado en que se encuentra la actividad
         /// </summary>
-        public Prioridad Prioridad { get; set; }
+        public Estado Estado { get => _Estado; set => ModificarEstado(value); }
 
+        /// <summary>
+        /// Multimedias anexa a la actividad
+        /// </summary>
+        public List<Multimedia> Multimedia { get; set; }
+
+        private void ModificarEstado(Estado estado)
+        {
+            if (estado == null)
+                throw new ArgumentException($"El estado a agregar no debe ser nulo");
+
+            FechaCambioEstado = DateTime.Now;
+            _Estado = estado;
+            
+        }
     }
 
     

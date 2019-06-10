@@ -5,49 +5,23 @@ using System.Text;
 namespace Actividades.Core.Model
 {
     /// <summary>
-    /// Prioridad que tiene la actividad
+    /// Indica los tipos de multimedias a manejar
     /// </summary>
-    public enum Prioridad
+    public enum TipoMultimedia
     {
         /// <summary>
-        /// Indica que la prioridad de la actividad es baja
+        /// El archivo es una imagen
         /// </summary>
-        Baja = 1,
+        Imagen = 1,
 
         /// <summary>
-        /// Indica que la prioridad de la actividad es media
+        /// El archivo es un video
         /// </summary>
-        Media = 2,
+        Video = 2,
 
         /// <summary>
-        /// Indica que la prioridad de la actividad es alta
+        /// El archivo no se encuentra catalogado con un tipo especifico.
         /// </summary>
-        Alta = 3,
-
-        /// <summary>
-        /// Indica que la prioridad de la actividad es critica
-        /// </summary>
-        Critica = 4
-    }
-
-    /// <summary>
-    /// Indica el estado en que se encuentra la actividad
-    /// </summary>
-    public enum Estado
-    {
-        /// <summary>
-        /// La actividad esta abierta
-        /// </summary>
-        Abierto = 1,
-
-        /// <summary>
-        /// La actividad se cerro
-        /// </summary>
-        Cerrado = 2,
-
-        /// <summary>
-        /// La actividad se elimino
-        /// </summary>
-        Eliminado = 3
+        Archivo = 3 
     }
 }
