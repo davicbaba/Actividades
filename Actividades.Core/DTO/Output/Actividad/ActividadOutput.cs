@@ -42,9 +42,5 @@ namespace Actividades.Core.DTO.Output.Actividad
         /// </summary>
         public Estado Estado { get; set; }
 
-        /// <summary>
-        /// Prioridad de la actividad
-        /// </summary>
-        public Prioridad Prioridad { get; set; }
     }
 }

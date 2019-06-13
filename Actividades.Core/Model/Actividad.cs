@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Actividades.Core.Model.Base;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,7 +8,7 @@ namespace Actividades.Core.Model
     /// <summary>
     /// Representa una actividad a realizar
     /// </summary>
-    public class Actividad
+    public class Actividad : IValidEntity
     {
         private Estado _Estado { get; set; }
 
@@ -27,11 +28,6 @@ namespace Actividades.Core.Model
         public string Descripcion { get; set; }
 
         /// <summary>
-        /// Fecha en que se vence la actividad
-        /// </summary>
-        public DateTime FechaVencimiento { get; set; }
-
-        /// <summary>
         /// Fecha en que se completo la actividad
         /// </summary>
         public DateTime? FechaCambioEstado { get; set; }
@@ -40,6 +36,11 @@ namespace Actividades.Core.Model
         /// Fecha en que la actividad se elimino
         /// </summary>
         public DateTime? FechaBorrado { get; set; }
+
+        /// <summary>
+        /// Indica si la actividad a sido finalizada
+        /// </summary>
+        public bool Finalizada { get; set; }
 
         /// <summary>
         /// Orden de presentacion de la actividad
@@ -61,6 +62,20 @@ namespace Actividades.Core.Model
         /// </summary>
         public List<Multimedia> Multimedia { get; set; }
 
+        /// <summary>
+        /// Fecha de inicio de la actividad
+        /// </summary>
+        public DateTime FechaInicio { get; set; }
+
+        /// <summary>
+        /// Fecha en la que finalizara la actividad
+        /// </summary>
+        public DateTime FechaFin { get; set; }
+
+        /// <summary>
+        /// Modifica el estado de una actividad
+        /// </summary>
+        /// <param name="estado"></param>
         private void ModificarEstado(Estado estado)
         {
             if (estado == null)
@@ -69,6 +84,22 @@ namespace Actividades.Core.Model
             FechaCambioEstado = DateTime.Now;
             _Estado = estado;
             
+        }
+
+        /// <summary>
+        /// Obtener la duracion de una actividad
+        /// </summary>
+        public TimeSpan GetDuracionActividad()
+        {
+            return FechaFin - FechaInicio;
+        }
+
+        public bool IsValid()
+        {
+            if (FechaInicio > FechaFin)
+                return false;
+
+            return true;
         }
     }
 

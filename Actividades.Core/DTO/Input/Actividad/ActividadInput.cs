@@ -38,5 +38,10 @@ namespace Actividades.Core.DTO.Input.Actividad
         /// Multimedias anexa a la actividad
         /// </summary>
         public List<MultimediaInput> Multimedia { get; set; }
+
+        /// <summary>
+        /// Si la actividad se debe agregar en el lapso de tiempo especificado aunque ya este ocupado ese horario.
+        /// </summary>
+        public bool Forzar { get; set; }
     }
 }

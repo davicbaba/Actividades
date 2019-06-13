@@ -18,11 +18,11 @@ namespace Actividades.WebApi.Controllers
         {
             return Ok();
         }
-        [HttpPost("registros")]
-        public IActionResult GetLista([FromBody] ActividadGetListaInput data)
-        {
-            return Ok();
-        }
+        //[HttpPost("registros")]
+        //public IActionResult GetLista([FromBody] ActividadGetListaInput data)
+        //{
+        //    return Ok();
+        //}
 
         [HttpPost]
         public IActionResult Post([FromBody] List<ActividadInput> data)
