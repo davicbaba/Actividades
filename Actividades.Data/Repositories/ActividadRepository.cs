@@ -1,5 +1,6 @@
 ﻿using Actividades.Core.Model;
 using Actividades.Core.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -23,7 +24,7 @@ namespace Actividades.Data.Repositories
 
         public async Task<Actividad> GetActividad(int id)
         {
-            return await _context.Actividad.FindAsync(id);
+            return await _context.Actividad.Include(x => x.Multimedias).SingleOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task SaveChangesAsync()

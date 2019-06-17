@@ -1,7 +1,9 @@
 ﻿using Actividades.Core.Model;
 using Actividades.Core.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,7 +20,7 @@ namespace Actividades.Data.Repositories
 
         public async Task<Usuario> GetUsuario(string id)
         {
-            return await _context.Usuario.FindAsync(id);
+            return await _context.Usuario.Include(x => x.Actividades).SingleOrDefaultAsync(x => x.UserName == id);
         }
     }
 }

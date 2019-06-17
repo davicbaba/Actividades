@@ -4,6 +4,7 @@ using System.Linq;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Actividades.Core.Exceptions;
 
 namespace Actividades.Test.Model
 {
@@ -19,11 +20,8 @@ namespace Actividades.Test.Model
 
             Usuario usuario = GetUsuario();
 
-            //Ejecucion
-            bool agregado = usuario.IntentarGuardarActividad(actividad);
-
             //Prueba
-            Assert.AreEqual(agregado, true);
+            Assert.DoesNotThrow(() => usuario.IntentarGuardarActividad(actividad));
         }
 
         [Test]
@@ -55,11 +53,8 @@ namespace Actividades.Test.Model
 
             usuario.IntentarGuardarActividad(actividad);
 
-            //Ejecucion
-            bool agregado = usuario.IntentarGuardarActividad(actividad);
-
             //Prueba
-            Assert.AreEqual(agregado, false);
+            Assert.Throws<EntityException>(() => usuario.IntentarGuardarActividad(actividad));
         }
 
 
@@ -93,11 +88,8 @@ namespace Actividades.Test.Model
 
             tareaInesperada.FechaFin.AddMinutes(45);
 
-            //Ejecucion
-            bool agregado = usuario.IntentarGuardarActividad(tareaInesperada, true);
-
             //Prueba
-            Assert.AreEqual(agregado, true);
+            Assert.DoesNotThrow(() => usuario.IntentarGuardarActividad(tareaInesperada, true));
         }
 
         [Test]
@@ -139,7 +131,7 @@ namespace Actividades.Test.Model
                               tareaInesperada.GetDuracionActividad().Ticks;
 
             //Ejecucion
-            bool agregado = usuario.IntentarGuardarActividad(tareaInesperada, true);
+             usuario.IntentarGuardarActividad(tareaInesperada, true);
 
             long totalTicksDespues = usuario.Actividades.Sum(x => x.GetDuracionActividad().Ticks);
 
@@ -162,7 +154,6 @@ namespace Actividades.Test.Model
                 Id = max,
                 Descripcion = "Realizar actividad de dibujo tecnico",
                 Titulo = "Actividad dibujo tecnico",
-                Orden = 1,
                 Finalizada = false,
                 FechaCambioEstado = DateTime.Now
             };

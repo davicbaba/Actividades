@@ -9,6 +9,9 @@ namespace Actividades.Core.DTO.Input.Actividad
     /// </summary>
     public class ActividadInput
     {
+        /// <summary>
+        /// Identificador unico de la actividad
+        /// </summary>
         public int? Id { get; set; }
 
         /// <summary>
@@ -22,24 +25,24 @@ namespace Actividades.Core.DTO.Input.Actividad
         public string Descripcion { get; set; }
 
         /// <summary>
-        /// Fecha en que se vence la actividad
-        /// </summary>
-        public DateTime FechaVencimiento { get; set; }
-
-        /// <summary>
-        /// Orden de presentacion de la actividad
-        /// </summary>
-        public int Orden { get; set; }
-
-        /// <summary>
-        /// Identificador del estado en que se encuentra la actividad
+        /// Identificador unico del estado
         /// </summary>
         public string IdEstado { get; set; }
 
         /// <summary>
         /// Multimedias anexa a la actividad
         /// </summary>
-        public List<MultimediaInput> Multimedia { get; set; }
+        public List<MultimediaInput> Multimedias { get; set; }
+
+        /// <summary>
+        /// Fecha de inicio de la actividad
+        /// </summary>
+        public DateTime FechaInicio { get; set; }
+
+        /// <summary>
+        /// Fecha en la que finalizara la actividad
+        /// </summary>
+        public DateTime FechaFin { get; set; }
 
         /// <summary>
         /// Si la actividad se debe agregar en el lapso de tiempo especificado aunque ya este ocupado ese horario.

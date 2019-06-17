@@ -44,11 +44,6 @@ namespace Actividades.Core.Model
         public bool Finalizada { get; set; }
 
         /// <summary>
-        /// Orden de presentacion de la actividad
-        /// </summary>
-        public int Orden { get; set; }
-
-        /// <summary>
         /// Identificador unico del estado
         /// </summary>
         public string IdEstado { get;  private set; }

@@ -62,7 +62,6 @@ namespace Actividades.Test.Model
                 Id = max,
                 Descripcion = "Realizar actividad de dibujo tecnico",
                 Titulo = "Actividad dibujo tecnico",
-                Orden = 1,
                 Finalizada = false,
                 FechaCambioEstado = DateTime.Now
             };

@@ -13,6 +13,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
+using AutoMapper;
+using Actividades.Core.Repositories;
+using Actividades.Data.Repositories;
+using Actividades.Core.Service;
+using Actividades.Service;
 
 namespace Actividades.WebApi
 {
@@ -34,6 +39,13 @@ namespace Actividades.WebApi
             services.AddDbContext<ActividadContext>(options => options.UseSqlServer(connection, opts => opts.CommandTimeout(600)));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddScoped<IUsuarioService, UsuarioService>();
+
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IActividadRepository, ActividadRepository>();
 
             services.AddSwaggerGen(c =>
             {

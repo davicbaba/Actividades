@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Actividades.Core.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,7 +44,7 @@ namespace Actividades.Core.Model
         /// </summary>
         public List<Actividad> Actividades { get; private set; }
 
-        public bool IntentarGuardarActividad(Actividad actividad, bool forzar = false)
+        public void IntentarGuardarActividad(Actividad actividad, bool forzar = false)
         {
             if (actividad == null)
                 throw new ArgumentException("La actividad a agregar no debe ser nula");
@@ -52,7 +53,7 @@ namespace Actividades.Core.Model
 
             if (horarioDisponible == false && forzar == false)
             {
-                return false;
+                throw new EntityException("La actividad no se puede agregar porque no hay espacio en la agenda del usuario");
             }
 
             if (forzar)
@@ -62,7 +63,6 @@ namespace Actividades.Core.Model
 
             this.AddOrUpdate(actividad);
 
-            return true;
         }
 
         private void AddOrUpdate(Actividad actividad)
@@ -98,8 +98,8 @@ namespace Actividades.Core.Model
 
             foreach (var actividadMover in actividadesMover)
             {
-                actividadMover.FechaInicio.AddTicks(milisegundosMover);
-                actividadMover.FechaFin.AddTicks(milisegundosMover);
+                actividadMover.FechaInicio =  actividadMover.FechaInicio.AddTicks(milisegundosMover);
+                actividadMover.FechaFin = actividadMover.FechaFin.AddTicks(milisegundosMover);
             }
         }
 
