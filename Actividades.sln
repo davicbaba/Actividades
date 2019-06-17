@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Actividades.WebApi", "Activ
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Actividades.Service", "Actividades.Service\Actividades.Service.csproj", "{93406389-0C77-4AC1-B200-2E1E9F0BF617}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Actividades.Test", "Actividades.Test\Actividades.Test.csproj", "{E3939251-A4F5-4D2A-8C17-58A8D0664FA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Actividades.Test", "Actividades.Test\Actividades.Test.csproj", "{E3939251-A4F5-4D2A-8C17-58A8D0664FA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Actividades.Core.Multimedias", "Actividades.Core.Multimedias\Actividades.Core.Multimedias.csproj", "{47DA49A6-E980-4CDF-9707-6B0901C9D224}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Actividades.Core.Multimedias", "Actividades.Core.Multimedias\Actividades.Core.Multimedias.csproj", "{47DA49A6-E980-4CDF-9707-6B0901C9D224}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Actividades.Data", "Actividades.Data\Actividades.Data.csproj", "{B1AD82D8-E9A5-4558-97E3-774ABB22014B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{47DA49A6-E980-4CDF-9707-6B0901C9D224}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47DA49A6-E980-4CDF-9707-6B0901C9D224}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47DA49A6-E980-4CDF-9707-6B0901C9D224}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1AD82D8-E9A5-4558-97E3-774ABB22014B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1AD82D8-E9A5-4558-97E3-774ABB22014B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1AD82D8-E9A5-4558-97E3-774ABB22014B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1AD82D8-E9A5-4558-97E3-774ABB22014B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

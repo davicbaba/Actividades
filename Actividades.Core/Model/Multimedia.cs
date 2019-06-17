@@ -35,6 +35,11 @@ namespace Actividades.Core.Model
         public string TipoMultimediaTexto { get => TipoMultimedia.ToString(); }
 
         /// <summary>
+        /// Identificador unico de la actividad 
+        /// </summary>
+        public int IdActividad { get; set; }
+
+        /// <summary>
         /// Determina el tipo de multimedia en base al mimetype.
         /// </summary>
         /// <returns></returns>

@@ -43,7 +43,7 @@ namespace Actividades.Core.Model
         /// </summary>
         public List<Actividad> Actividades { get; private set; }
 
-        public bool IntentarAgregarActividad(Actividad actividad, bool forzar = false)
+        public bool IntentarGuardarActividad(Actividad actividad, bool forzar = false)
         {
             if (actividad == null)
                 throw new ArgumentException("La actividad a agregar no debe ser nula");
@@ -60,10 +60,25 @@ namespace Actividades.Core.Model
                 MoverActividades(actividad);
             }
 
-            Actividades.Add(actividad);
+            this.AddOrUpdate(actividad);
 
             return true;
         }
+
+        private void AddOrUpdate(Actividad actividad)
+        {
+            Actividad act = Actividades.FirstOrDefault(x => x.Id == actividad.Id);
+
+            if(act != null)
+            {
+                act = actividad;
+            }
+            else
+            {
+                Actividades.Add(actividad);
+            }
+        }
+
 
         private bool HorarioDisponible(DateTime fechaInicio, DateTime fechaFin)
         {

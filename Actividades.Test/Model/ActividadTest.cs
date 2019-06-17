@@ -4,11 +4,14 @@ using System.Text;
 using System.Linq;
 using Actividades.Core.Model;
 using NUnit.Framework;
+using Actividades.Core.Exceptions;
 
 namespace Actividades.Test.Model
 {
     public class ActividadTest
     {
+        private List<Actividad> ActividadesGeneradas = new List<Actividad>();
+
         [Test]
         public void IsValid_FechasSinRelacion_NoEsValido()
         {
@@ -18,12 +21,8 @@ namespace Actividades.Test.Model
             actividad.FechaInicio = DateTime.Now.AddHours(1);
             actividad.FechaFin = DateTime.Now;
 
-            //Ejecutar
-            bool isValid = actividad.IsValid();
-
-
             //Probar
-            Assert.AreEqual(isValid, false); 
+            Assert.Throws<EntityException>(() => actividad.IsValid());
         }
 
         [Test]
@@ -50,15 +49,27 @@ namespace Actividades.Test.Model
 
         private Actividad GetActividad()
         {
-            return new Actividad()
+            int max = 1;
+
+            if(ActividadesGeneradas.Any())
             {
-                Id = 1,
+                max = ActividadesGeneradas.Max(x => x.Id);
+                max++;
+            }
+
+            Actividad act =  new Actividad()
+            {
+                Id = max,
                 Descripcion = "Realizar actividad de dibujo tecnico",
                 Titulo = "Actividad dibujo tecnico",
                 Orden = 1,
                 Finalizada = false,
                 FechaCambioEstado = DateTime.Now
             };
+
+            ActividadesGeneradas.Add(act);
+
+            return act;
         }
 
     }

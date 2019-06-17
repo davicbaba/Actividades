@@ -1,4 +1,5 @@
-﻿using Actividades.Core.Model.Base;
+﻿using Actividades.Core.Exceptions;
+using Actividades.Core.Model.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -60,7 +61,7 @@ namespace Actividades.Core.Model
         /// <summary>
         /// Multimedias anexa a la actividad
         /// </summary>
-        public List<Multimedia> Multimedia { get; set; }
+        public List<Multimedia> Multimedias { get; set; }
 
         /// <summary>
         /// Fecha de inicio de la actividad
@@ -71,6 +72,11 @@ namespace Actividades.Core.Model
         /// Fecha en la que finalizara la actividad
         /// </summary>
         public DateTime FechaFin { get; set; }
+
+        /// <summary>
+        /// Identificador del usuario al que pertenece la actividad
+        /// </summary>
+        public string IdUsuario { get; set; }
 
         /// <summary>
         /// Modifica el estado de una actividad
@@ -94,12 +100,11 @@ namespace Actividades.Core.Model
             return FechaFin - FechaInicio;
         }
 
-        public bool IsValid()
+        public void IsValid()
         {
             if (FechaInicio > FechaFin)
-                return false;
+                throw new EntityException("La fecha inicio de la actividad no debe ser mayor a la fecha final");
 
-            return true;
         }
     }
 

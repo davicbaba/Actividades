@@ -15,6 +15,11 @@ namespace Actividades.Core.Model
         public string Id { get; set; }
 
         /// <summary>
+        /// Nombre del estado
+        /// </summary>
+        public string NombreEstado { get; set; }
+
+        /// <summary>
         /// Descripcion amigable del estado
         /// </summary>
         public string DescripcionEstado { get; set; }

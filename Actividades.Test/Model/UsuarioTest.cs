@@ -9,6 +9,8 @@ namespace Actividades.Test.Model
 {
     public class UsuarioTest
     {
+        private List<Actividad> ActividadesGeneradas = new List<Actividad>();
+
         [Test]
         public void IntentarAgregarActividad_HorarioDisponible_AgregadoCorrectamente()
         {
@@ -18,7 +20,7 @@ namespace Actividades.Test.Model
             Usuario usuario = GetUsuario();
 
             //Ejecucion
-            bool agregado = usuario.IntentarAgregarActividad(actividad);
+            bool agregado = usuario.IntentarGuardarActividad(actividad);
 
             //Prueba
             Assert.AreEqual(agregado, true);
@@ -33,7 +35,7 @@ namespace Actividades.Test.Model
             Usuario usuario = GetUsuario();
 
             //Ejecucion
-            usuario.IntentarAgregarActividad(actividad);
+            usuario.IntentarGuardarActividad(actividad);
 
             //Prueba
             Assert.AreEqual(usuario.Actividades.Count, 1);
@@ -51,10 +53,10 @@ namespace Actividades.Test.Model
 
             Usuario usuario = GetUsuario();
 
-            usuario.IntentarAgregarActividad(actividad);
+            usuario.IntentarGuardarActividad(actividad);
 
             //Ejecucion
-            bool agregado = usuario.IntentarAgregarActividad(actividad);
+            bool agregado = usuario.IntentarGuardarActividad(actividad);
 
             //Prueba
             Assert.AreEqual(agregado, false);
@@ -83,16 +85,16 @@ namespace Actividades.Test.Model
 
             Usuario usuario = GetUsuario();
 
-            usuario.IntentarAgregarActividad(comer);
-            usuario.IntentarAgregarActividad(trabajar);
-            usuario.IntentarAgregarActividad(hacerTareas);
+            usuario.IntentarGuardarActividad(comer);
+            usuario.IntentarGuardarActividad(trabajar);
+            usuario.IntentarGuardarActividad(hacerTareas);
 
             Actividad tareaInesperada = comer;
 
             tareaInesperada.FechaFin.AddMinutes(45);
 
             //Ejecucion
-            bool agregado = usuario.IntentarAgregarActividad(tareaInesperada, true);
+            bool agregado = usuario.IntentarGuardarActividad(tareaInesperada, true);
 
             //Prueba
             Assert.AreEqual(agregado, true);
@@ -120,11 +122,14 @@ namespace Actividades.Test.Model
 
             Usuario usuario = GetUsuario();
 
-            usuario.IntentarAgregarActividad(comer);
-            usuario.IntentarAgregarActividad(trabajar);
-            usuario.IntentarAgregarActividad(hacerTareas);
+            usuario.IntentarGuardarActividad(comer);
+            usuario.IntentarGuardarActividad(trabajar);
+            usuario.IntentarGuardarActividad(hacerTareas);
 
-            Actividad tareaInesperada = comer;
+            Actividad tareaInesperada = GetActividad();
+
+            tareaInesperada.FechaInicio = comer.FechaInicio;
+            tareaInesperada.FechaFin = comer.FechaFin;
 
             tareaInesperada.FechaFin.AddMinutes(45);
 
@@ -134,7 +139,7 @@ namespace Actividades.Test.Model
                               tareaInesperada.GetDuracionActividad().Ticks;
 
             //Ejecucion
-            bool agregado = usuario.IntentarAgregarActividad(tareaInesperada, true);
+            bool agregado = usuario.IntentarGuardarActividad(tareaInesperada, true);
 
             long totalTicksDespues = usuario.Actividades.Sum(x => x.GetDuracionActividad().Ticks);
 
@@ -144,15 +149,26 @@ namespace Actividades.Test.Model
 
         private Actividad GetActividad()
         {
-            return new Actividad()
+            int max = 1;
+
+            if (ActividadesGeneradas.Any())
             {
-                Id = 1,
+                max = ActividadesGeneradas.Max(x => x.Id);
+                max++;
+            }
+
+            Actividad act = new Actividad()
+            {
+                Id = max,
                 Descripcion = "Realizar actividad de dibujo tecnico",
                 Titulo = "Actividad dibujo tecnico",
                 Orden = 1,
                 Finalizada = false,
                 FechaCambioEstado = DateTime.Now
             };
+
+            ActividadesGeneradas.Add(act);
+            return act;
         }
 
         private Usuario GetUsuario()

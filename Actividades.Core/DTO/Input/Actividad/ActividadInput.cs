@@ -9,6 +9,8 @@ namespace Actividades.Core.DTO.Input.Actividad
     /// </summary>
     public class ActividadInput
     {
+        public int? Id { get; set; }
+
         /// <summary>
         /// Titulo de la actividad
         /// </summary>

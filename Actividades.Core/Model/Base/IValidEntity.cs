@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Actividades.Core.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,9 +11,11 @@ namespace Actividades.Core.Model.Base
     public interface IValidEntity
     {
         /// <summary>
-        /// Se debe realizar todas las validaciones de negocio de la entidadad
+        /// Realiza todas las validaciones de negocio de la entidad
         /// </summary>
+        /// <exception cref="EntityException">Si es encuentra alguna regla de negocio quebrantada.</exception>
         /// <returns></returns>
-        bool IsValid();
+        void IsValid();
+
     }
 }

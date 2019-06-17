@@ -20,23 +20,20 @@ namespace Actividades.Core.Service
         Task<Actividad> GetActividad(int id);
 
         /// <summary>
-        /// Obtener una lista de actividades
-        /// </summary>
-        /// <param name="ids"></param>
-        /// <returns></returns>
-        Task<Actividad> GetListaActividades(int[] ids);
-
-        /// <summary>
         /// Elimina una actividad.
         /// </summary>
+        /// <param name="id"></param>
         /// <returns></returns>
-        Task DeleteActividad();
+        Task DeleteActividad(int id);
 
         /// <summary>
         /// Agrega una actividad
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="idUsuario"></param>
         /// <returns></returns>
-        Task AddActividad(ActividadInput data);
+        Task<bool> AddActividad(ActividadInput data, string idUsuario);
+
+
     }
 }
