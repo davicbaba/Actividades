@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Actividades.Core.DTO.Output.Multimedia;
 using Actividades.Core.Model;
 
 namespace Actividades.Core.DTO.Output.Actividad
@@ -10,7 +11,7 @@ namespace Actividades.Core.DTO.Output.Actividad
         /// <summary>
         /// Identificador unico de la actividad
         /// </summary>
-        public int Codigo { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Titulo de la actividad
@@ -23,28 +24,45 @@ namespace Actividades.Core.DTO.Output.Actividad
         public string Descripcion { get; set; }
 
         /// <summary>
-        /// Fecha en que se vence la actividad
-        /// </summary>
-        public DateTime FechaVencimiento { get; set; }
-
-        /// <summary>
         /// Fecha en que se completo la actividad
         /// </summary>
         public DateTime? FechaCambioEstado { get; set; }
 
         /// <summary>
-        /// Orden de presentacion de la actividad
+        /// Fecha en que la actividad se elimino
         /// </summary>
-        public int Orden { get; set; }
+        public DateTime? FechaBorrado { get; set; }
 
         /// <summary>
-        /// Estado en que se encuentra la actividad
+        /// Indica si la actividad a sido finalizada
         /// </summary>
-        public Estado Estado { get; set; }
+        public bool Finalizada { get; set; }
 
         /// <summary>
-        /// Prioridad de la actividad
+        /// Identificador unico del estado
         /// </summary>
-        public Prioridad Prioridad { get; set; }
+        public string IdEstado { get; private set; }
+
+        /// <summary>
+        /// Multimedias anexa a la actividad
+        /// </summary>
+        public List<MultimediaOutput> Multimedias { get; set; }
+
+        /// <summary>
+        /// Fecha de inicio de la actividad
+        /// </summary>
+        public DateTime FechaInicio { get; set; }
+
+        /// <summary>
+        /// Fecha en la que finalizara la actividad
+        /// </summary>
+        public DateTime FechaFin { get; set; }
+
+        /// <summary>
+        /// Identificador del usuario al que pertenece la actividad
+        /// </summary>
+        public string IdUsuario { get; set; }
+
+
     }
 }

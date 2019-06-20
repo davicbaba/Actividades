@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Actividades.Core.Model;
 
 namespace Actividades.Core.DTO.Input.Actividad
 {
     /// <summary>
-    /// Datos necesarios para poder agregar una actividad
+    /// Datos necesarios para poder generar una <see cref="Model.Actividad"/>
     /// </summary>
     public class ActividadInput
     {
         /// <summary>
         /// Identificador unico de la actividad
         /// </summary>
-        public int Codigo { get; set; }
+        public int? Id { get; set; }
 
         /// <summary>
         /// Titulo de la actividad
@@ -26,29 +25,28 @@ namespace Actividades.Core.DTO.Input.Actividad
         public string Descripcion { get; set; }
 
         /// <summary>
-        /// Fecha en que se vence la actividad
+        /// Identificador unico del estado
         /// </summary>
-        public DateTime FechaVencimiento { get; set; }
+        public string IdEstado { get; set; }
 
         /// <summary>
-        /// Fecha en que se completo la actividad
+        /// Multimedias anexa a la actividad
         /// </summary>
-        public DateTime? FechaCambioEstado { get; set; }
+        public List<MultimediaInput> Multimedias { get; set; }
 
         /// <summary>
-        /// Orden de presentacion de la actividad
+        /// Fecha de inicio de la actividad
         /// </summary>
-        public int Orden { get; set; }
+        public DateTime FechaInicio { get; set; }
 
         /// <summary>
-        /// Estado en que se encuentra la actividad
+        /// Fecha en la que finalizara la actividad
         /// </summary>
-        public Estado Estado { get; set; }
+        public DateTime FechaFin { get; set; }
 
         /// <summary>
-        /// Prioridad de la actividad
+        /// Si la actividad se debe agregar en el lapso de tiempo especificado aunque ya este ocupado ese horario.
         /// </summary>
-        public Prioridad Prioridad { get; set; }
-
+        public bool Forzar { get; set; }
     }
 }

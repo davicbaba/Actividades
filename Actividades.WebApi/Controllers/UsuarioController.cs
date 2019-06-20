@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Actividades.Core.DTO.Input.Usuario;
+using Actividades.Core.DTO.Output.Usuario;
+using Actividades.Core.Exceptions;
+using Actividades.Core.Model;
+using Actividades.Core.Service;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Actividades.WebApi.Controllers
@@ -13,30 +16,34 @@ namespace Actividades.WebApi.Controllers
     [ApiController]
     public class UsuarioController : ControllerBase
     {
+        private readonly IUsuarioService _usuarioService;
+        private readonly IMapper _mapper;
 
-        [HttpGet("{id}")]
-        public IActionResult GetById([FromRoute] string id)
+        public UsuarioController(IUsuarioService usuarioService, IMapper mapper)
         {
-            return Ok();
+            _usuarioService = usuarioService;
+            _mapper = mapper;
+
         }
-        [HttpPost("registros")]
-        public IActionResult GetLista([FromBody] UsuarioGetListaInput data)
+        [HttpGet("{idUsuario}")]
+        public async Task<IActionResult> GetUsuario([FromRoute] string idUsuario)
         {
-            return Ok();
-        }
+            try
+            {
+                Usuario usuario = await _usuarioService.GetUsuario(idUsuario);
 
-       
+                if (usuario == null)
+                    return NotFound(idUsuario);
 
-        [HttpPut]
-        public IActionResult Put()
-        {
-            return Ok();
-        }
+                UsuarioOutput usuarioOutput = _mapper.Map<UsuarioOutput>(usuario);
 
-        [HttpPatch("{id}")]
-        public IActionResult Patch([FromRoute] string id, [FromBody] JsonPatchDocument<UsuarioInput> data)
-        {
-            return Ok();
+                return Ok(usuarioOutput);
+            }
+            catch (EntityException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
     }
 }

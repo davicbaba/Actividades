@@ -3,43 +3,70 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Actividades.Core.DTO.Input.Actividad;
+using Actividades.Core.DTO.Output.Actividad;
+using Actividades.Core.Exceptions;
+using Actividades.Core.Model;
+using Actividades.Core.Service;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Actividades.WebApi.Controllers
 {
-    [Route("api/actividad")]
+    [Route("api/usuario/{idUsuario}")]
     [ApiController]
     public class ActividadController : ControllerBase
     {
-        [HttpGet("{id}")]
-        public IActionResult GetById([FromRoute] string id)
+        private readonly IUsuarioService _usuarioService;
+        private readonly IMapper _mapper;
+
+        public ActividadController(IUsuarioService usuarioService, IMapper mapper)
         {
-            return Ok();
-        }
-        [HttpPost("registros")]
-        public IActionResult GetLista([FromBody] ActividadGetListaInput data)
-        {
-            return Ok();
+            _usuarioService = usuarioService;
+            _mapper = mapper;
+
         }
 
-        [HttpPost]
-        public IActionResult Post([FromBody] List<ActividadInput> data)
+        [HttpPost("actividad")]
+        public async Task<IActionResult> AgregarActividad([FromBody] ActividadInput data, [FromRoute] string idUsuario)
         {
-            return Ok();
+            try
+            {
+                Actividad actividad = _mapper.Map<Actividad>(data);
+
+                await _usuarioService.AddActividad(actividad, idUsuario, data.Forzar);
+
+                ActividadOutput actividadOutput = _mapper.Map<ActividadOutput>(actividad);
+
+                return Ok(actividadOutput);
+            }
+            catch (EntityException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
 
-        [HttpPut]
-        public IActionResult Put()
+        [HttpGet("actividad")]
+        public async Task<IActionResult> GetActividades( [FromRoute] string idUsuario)
         {
-            return Ok();
-        }
+            try
+            {
+                Usuario usuario = await _usuarioService.GetUsuario(idUsuario);
 
-        [HttpPatch("{id}")]
-        public IActionResult Patch([FromRoute] string id, [FromBody] JsonPatchDocument<ActividadInput> data)
-        {
-            return Ok();
+                if (usuario == null)
+                    return NotFound(idUsuario);
+
+                List<ActividadOutput> actividadOutput = _mapper.Map<List<ActividadOutput>>(usuario.Actividades);
+
+                return Ok(actividadOutput);
+            }
+            catch (EntityException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
     }
 }
